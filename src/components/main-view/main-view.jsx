@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { LoginView } from '../Login-view/login-view';
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { Movieview } from '../movie-view/movie-view';
 
@@ -19,6 +19,7 @@ export class Mainview extends React.Component{
     componentDidMount() {
         axios.get('https://kaycee-anime-site.herokuapp.com/movies')
             .then(response => {
+
                 this.setState({
                     movies: response.data
                 });
@@ -30,7 +31,7 @@ export class Mainview extends React.Component{
 
     setSelectedMovie(newSelectedMovie) {
         this.setState({
-            selectedMovie: Movie
+            selectedMovie: movie
         });
     }
 
