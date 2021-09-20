@@ -1,5 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Form, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 export function LoginView(props) {
     const [username, setUsername ] = useState('');
@@ -7,10 +8,18 @@ export function LoginView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
         /* Send a request to the server for authentication */
-        /*then call props.onLoggedIn(username) */
-        props.onLoggedIn(username);
+        axios.post('https://kaycee-anime-site.herokuapp.com/login', {
+            Username: username,
+            Password: password
+        })
+        .then(response => {
+            const data = response.data;
+            props.onLoggedIn(data);
+        })
+        .catch(e => {
+            console.log('no such user')
+        });
     };
 
     return (
