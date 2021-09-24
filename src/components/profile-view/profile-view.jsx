@@ -8,7 +8,7 @@ import axios from 'axios';
 import { CardDeck, Form } from 'react-bootstrap';
 import userEvent from '@testing-library/user-event';
 
-export class profileView extends React.Component{
+export class ProfileView extends React.Component{
     constructor () {
         super ();
 
@@ -29,15 +29,19 @@ export class profileView extends React.Component{
         } 
     }
 
-    //get the users
-    getUsers(token) {
-        axios.get('https://kaycee-anime-site.herokuapp.com/users', {
-            headers: { Authorization: 'Bearer${token}' }
+    //get the user
+    getUser(token) {
+        const username = localStorage.getItem('user');
+        axios.get(`https://kaycee-anime-site.herokuapp.com/users/${username}`, {
+            headers: { Authorization: 'Bearer${token}' },
         })
         .then(response => {
             //Assign the result to the state
             this.setState({
-                users: response.data
+                Username: response.data.Username,
+                Password: response.data.Password,
+                Email: response.data.Email,
+                FavoriteMovies: response.data.FavoriteMovies,
             });
         })
         .catch(function (error) {
@@ -47,11 +51,21 @@ export class profileView extends React.Component{
 
 
      render (){
-        const { users } = this.props;
-        const { movie } = this.props;
+        const { FavoriteMovies, validated } = this.props;
+        const { movies } = this.props;
         
         return(
-            <h1>playceholder</h1>
+            <div className="profile-view">
+                <div className="description view">
+                    <h1>{this.state.Username}</h1>
+                    <h3>{this.state.Email}</h3>
+                    <h3>{this.state.FavoriteMovies}</h3>
+                </div>
+                <div>
+                    <h1>Placeholder</h1>
+                </div>
+            </div>
+            
         )
 
     };

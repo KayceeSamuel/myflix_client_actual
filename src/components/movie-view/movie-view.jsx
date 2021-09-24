@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { profileView } from '../profile-view/profile-view';
 
 export class Movieview extends React.Component {
 
@@ -35,6 +36,7 @@ export class Movieview extends React.Component {
 
     render () {
         const { movie, onBackClick } = this.props;
+        const { user } = this.props;
         return (
             <div className="movie-view">
                 <div className="movie-poster">
@@ -49,7 +51,7 @@ export class Movieview extends React.Component {
                     <span className="label">Description: </span>
                     <span className="value">{movie.Description}</span>
                 </div>
-                
+
 
                 <Link to={`/stream/${movie.Stream.Name}`}>
                     <Button variant="link">Stream: {movie.Stream.Name}</Button>
@@ -58,6 +60,11 @@ export class Movieview extends React.Component {
                 <Link to={`/genres/${movie.Genre.Name}`}>
                     <Button variant="link">Genre: {movie.Genre.Name}</Button>
                 </Link>
+
+                <Link to={`/user/${user}`}>
+                    <Button variant="link">Profile</Button>
+                </Link>
+
             </div>
         );
     }
