@@ -28,3 +28,16 @@ export function RegistrationView(props) {
         })
     }
 }
+
+RegistrationView.propTypes = {
+    movie: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Genre: PropTypes.shape({
+            Name: PropTypes.string.isRequired
+        }),
+        Stream: PropTypes.shape({
+            Name: PropTypes.string.isRequired
+        }),
+    }).isRequired
+};

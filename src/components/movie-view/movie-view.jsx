@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { profileView } from '../profile-view/profile-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 export class Movieview extends React.Component {
 
@@ -21,10 +21,10 @@ export class Movieview extends React.Component {
 
     addFavorite() {
         const token = localStorage.getItem('token');
-        const username = localStorage.getItem('user');
+        const username =  localStorage.getItem('user');
 
-        axios.post('https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movie._id}', {}, {
-            headers: { Authorization: 'Bearer ${token}' }
+        axios.post(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movie._id}`, {}, {
+            headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
             alert('Added to Favorites List')
@@ -40,7 +40,7 @@ export class Movieview extends React.Component {
         return (
             <div className="movie-view">
                 <div className="movie-poster">
-                    <img src={movie.ImagePath} />
+                    <img src={movie.ImagePath} alt ='pic of anime' />
                 </div>
                 
                 <div className="movie-title">
@@ -61,9 +61,15 @@ export class Movieview extends React.Component {
                     <Button variant="link">Genre: {movie.Genre.Name}</Button>
                 </Link>
 
-                <Link to={`/user/${user}`}>
+                <Link to={ user }>
                     <Button variant="link">Profile</Button>
                 </Link>
+
+                <Button variant ='danger' className='fav-button' value = {movie._id} onClick={(e) => this.addFavorite(e, movie)}>
+                    Add to Favorites
+                </Button>
+
+                <Button variant ="primary" onClick={() => {onBackClick(null); }}>Back</Button>
 
             </div>
         );

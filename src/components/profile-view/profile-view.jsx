@@ -62,7 +62,7 @@ export class ProfileView extends React.Component{
                     <h3>{this.state.FavoriteMovies}</h3>
                 </div>
                 <div>
-                    <h1>Placeholder</h1>
+                    <h1>placeholder</h1>
                 </div>
             </div>
             

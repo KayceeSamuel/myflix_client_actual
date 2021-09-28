@@ -14,10 +14,13 @@ import { Movieview } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { StreamView } from '../stream-view/stream-view';
 import { GenreView } from '../genre/genre';
+import { ProfileView } from '../profile-view/profile-view';
+import { NavBar } from '../navbar-view/navbar-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { ProfileView } from '../profile-view/profile-view';
+import Container from 'react-bootstrap/Container';
+
 
 
 
@@ -67,13 +70,11 @@ class Mainview extends React.Component{
 
     getMovies(token) {
         axios.get('https://kaycee-anime-site.herokuapp.com/movies', {
-            headers: { Authorization: 'Bearer${token}'}
+            headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
             // Assign the result to the state
-            this.setState({
-                movies: response.data
-            });
+            this.props.setMovies(response.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -93,6 +94,11 @@ class Mainview extends React.Component{
         
         return (
             <Router>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <h1>My Anime Site</h1>
+                </div>
+               
+                <NavBar user={user} />
                 <Row className="main-view justify-content-md-center">
                     <Route exact path="/" render={() => {
                         if (!user) return <Col>
@@ -160,4 +166,4 @@ let mapStateToProps = state => {
     return { movies: state.movies }
 }
 
-export default connect(mapStateToProps, { setMovies})(Mainview);
+export default connect(mapStateToProps, { setMovies } )(Mainview);
