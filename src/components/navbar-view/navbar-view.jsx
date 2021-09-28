@@ -27,7 +27,7 @@ export class NavBar extends React.Component {
         <NavBar bg="dark" collapseOnSelect fixed='top' expand="lg" variant="dark">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-            <Nav.Collapse id="responsive-navbar-nav">
+            <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className='ml-auto'>
 
                     <Nav.Link as={Link} to={movies} className="link-text">
@@ -45,7 +45,7 @@ export class NavBar extends React.Component {
                 <Form >
                     <FormControl type="text" placeholder="Search" />
                 </Form>
-            </Nav.Collapse>
+            </Navbar.Collapse>
             </NavBar>
         );
     }
