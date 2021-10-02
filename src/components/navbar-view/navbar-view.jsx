@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 export class NavBar extends React.Component {
     constructor() {
@@ -16,37 +17,30 @@ export class NavBar extends React.Component {
     }
 
     render() {
-        console.log(this.props, "iiuiug")
 
         const { user } = this.props;
         const movies = `/`;
         const profile = `/users/${user}`;
+        const register = `/register`;
 
-        
+
         return (
-            <NavBar bg="dark" collapseOnSelect fixed='top' expand="lg" variant="dark">
-                
-
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className='ml-auto'>
-
-                        <Nav.Link as={Link} to={movies} className="link-text">
-                            Home
-                        </Nav.Link>
-
-                        <Nav.Link as={Link} to={profile} className="link-text">
-                            Profile
-                        </Nav.Link>
-
-                        <Nav.Link to={'/'} onClick={this.onLoggedOut}>
-                            Log Out
-                        </Nav.Link>
-                    </Nav>
-                    <Form >
-                        <FormControl type="text" placeholder="Search" />
-                    </Form>
-                </Navbar.Collapse>
-            </NavBar>
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand href={ movies }>Anime Recommender</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href= { movies }>Home</Nav.Link>
+                            <Nav.Link href= { profile }>Profile</Nav.Link>
+                            <Nav.Item href={`/`} onClick={this.onLoggedOut}>
+                                Log Out
+                            </Nav.Item>
+                            <Nav.Link href= { register }>Register</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         );
     }
 }

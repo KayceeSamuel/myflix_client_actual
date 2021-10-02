@@ -18,22 +18,20 @@ export class StreamView extends React.Component {
 
     render() {
         const { movie, onBackClick } = this.props;
+        const { stream } = this.props;
 
         return (
             <div className="stream-view">
                 <div className="stream-name">
                     <span className="label">Stream name: </span>
-                    <span className="value">{movie.Stream.Name}</span>
+                    <span className="value">{stream.Name}</span>
                 </div>
 
                 <div className="stream-about">
                     <span className="label">About: </span>
-                    <span className="value">{movie.Stream.About}</span>
+                    <span className="value">{stream.About}</span>
                 </div>
 
-                <Link to={movie.Stream.Link}>
-                    <Button variant="link">Link</Button>
-                </Link>
             </div>
         )
     }
