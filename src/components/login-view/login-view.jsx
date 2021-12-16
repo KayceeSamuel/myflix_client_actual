@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { RegistrationView } from '../registration-view/registration-view';
 import { Link } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+import './login.scss';
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
@@ -39,9 +40,9 @@ export function LoginView(props) {
                 </Form.Group>
 
                 <span>
+        
                     <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-                    <Button href="/register" variant="secondary">Register</Button>
-                   
+                    <Button onClick={() => {window.location.href="/register"}} variant="secondary">Register</Button>
                 </span>
             </Form>
         </div>

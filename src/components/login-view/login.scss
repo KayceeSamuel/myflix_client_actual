@@ -1,0 +1,34 @@
+.app-container {
+    display: grid;
+    justify-content: center;
+    padding-bottom: 500px;
+    
+}
+
+.form-title {
+    color: white;
+}
+
+form {
+    margin-top: 10%;
+}
+
+.form-label {
+    margin-top: 20px;
+    height: 25px;
+    color: black;
+}
+
+.form-control {
+    width: 400px !important;
+}
+
+.btn {
+    padding-top: 10px;
+    margin-top: 30px;
+}
+
+.buttons-login {
+    display: flex;
+    justify-content: space-evenly;
+}

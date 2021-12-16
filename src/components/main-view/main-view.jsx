@@ -20,6 +20,8 @@ import { NavBar } from '../navbar-view/navbar-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import './main.scss';
+import FooterPage from '../footer/footerView';
 
 
 
@@ -85,26 +87,22 @@ class Mainview extends React.Component {
     render() {
         const { movies } = this.props;
         const { user } = this.state;
-        /* if there is no user, the LoginView is rendered. IF there is a user logged in, the user details are *passed as a prop to the LoginView*/
         
-        if (!user) return <Row>
-            <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-            </Col>
-        </Row>
-
+        
+   
         return (
             <Router>
                 <NavBar user={user} />
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <h1>My Anime Site</h1>
+                <div className="firstHeader">
+                    <h1>Animeny</h1>
                 </div>
 
 
                 <Row className="main-view justify-content-md-center">
                     <Route exact path="/" render={() => {
+                        console.log('login')
                         if (!user) return <Col>
-                            <LoginView onLoggedIN={user => this.onLoggedIn(user)} />
+                            <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                         </Col>
                         if (movies.length === 0) return <div className="main-view" />;
                         return <MoviesList movies={movies} />
@@ -117,12 +115,19 @@ class Mainview extends React.Component {
                         </Col>
                     }} />
 
-                    <Route path="/movies/:movieId" render={({ match }) => {
+                    <Route path="/login" render={() => {
+                        if(user) return <Redirect to="/" />
+                        return <Col>
+                            <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                            </Col>
+                    }} />
+
+                    <Route path="/movies/:movieId" render={({ match, history }) => {
                         if (!user) return <Col>
                             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                         </Col>
                         return <Col md={8}>
-                            <Movieview movie={movies.find(m => m._id === match.params.movieId)} />
+                            <Movieview movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()}/>
                         </Col>
                     }} />
 
@@ -159,6 +164,7 @@ class Mainview extends React.Component {
                     }} />
 
                 </Row>
+                <FooterPage />
 
             </Router>
         );

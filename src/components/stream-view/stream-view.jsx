@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
+
 export class StreamView extends React.Component {
     keypressCallback(event) {
         console.log(event.key);
@@ -30,6 +31,12 @@ export class StreamView extends React.Component {
                 <div className="stream-about">
                     <span className="label">About: </span>
                     <span className="value">{stream.About}</span>
+                </div>
+                <div>
+                
+                    <Button href={stream.Link}>Go to Site</Button>
+                    <Button onClick={() => {onBackClick(null); }}>Back</Button>
+
                 </div>
 
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
+
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { CardDeck, Form } from 'react-bootstrap';
@@ -10,6 +10,7 @@ import MoviesList from '../movies-list/movies-list';
 import userEvent from '@testing-library/user-event';
 import { MovieCard } from '../movie-card/movie-card';
 import Col from 'react-bootstrap/Col';
+import './profile.scss';
 
 
 export class ProfileView extends React.Component {
@@ -55,12 +56,13 @@ export class ProfileView extends React.Component {
     }
 
     //function to remove favorite movie
-    removeFavoriteMovie() {
+    removeFavoriteMovie(id) {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('user');
 
-        axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movie._id}`, {
-            headers: { Authorization: `Bearer ${token}` },
+        axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/` + (id), {
+//      axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movieId}
+        headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {
                 alert('Movie has been removed');
@@ -167,11 +169,16 @@ export class ProfileView extends React.Component {
         return (
             <div className="profile-view">
                 <div className="description view">
-                    <h4>Username: {this.state.Username}</h4>
-                    <h3>Email: {this.state.Email}</h3>
-                    <h3>Birthday: {this.state.Birthday}</h3>
-                    <h3>Favorite movies:
-                        {this.state.FavoriteMovies}</h3>
+                    <div>
+                        <a>Username: {this.state.Username}</a>
+                    </div>
+                    <div>
+                        <a>Email: {this.state.Email}</a>
+                    </div>
+                    <div>
+                        <a>Birthday: {this.state.Birthday}</a>
+                    </div>
+
                 </div>
                 <div className="favorite-movies">
                     {!!FavoriteMovies.length ?
@@ -183,7 +190,7 @@ export class ProfileView extends React.Component {
                                             <Card.Img style={{ width: '18rem' }} className="movieCard" variant="top" src={movie.ImagePath} />
                                             <Card.Body>
                                                 <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
-                                                <Button size='sm' className='profile-button-remove-favorite' variant='danger' value={movie._id} onClick={(e) => this.removeFavoriteMovie(e, movie)}>
+                                                <Button size='sm' className='deleteButton' variant='danger' value={movie._id} onClick={(e) => this.removeFavoriteMovie(movie._id)}>
                                                     Remove
                                                 </Button>
                                             </Card.Body>
@@ -196,53 +203,56 @@ export class ProfileView extends React.Component {
                     }
 
                 </div>
-                <h1 className="section">Update Profile</h1>
-                <Card.Body>
-                    <Form noValidate validated={this.state.validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Name, this.Username, this.Password, this.Email, this.Birthdate)}>
-                        
-                        <Form.Group controlId="formName">
-                            <Form.Label className="form-label">Name</Form.Label>
-                            <Form.Control type="text" placeholder="Change Name" onChange={(e) => this.setName(e.target.value)} />
-                        </Form.Group>
+                <div className="updateSection">
+                    <h1>Update Profile</h1>
+                    <Card.Body>
+                        <Form noValidate validated={this.state.validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Name, this.Username, this.Password, this.Email, this.Birthdate)}>
 
-                        <Form.Group controlId="formBasicUsername">
-                            <Form.Label className="form-label">Username</Form.Label>
-                            <Form.Control type="text" placeholder="Change Name" onChange={(e) => this.setUsername(e.target.value)} />
-                        </Form.Group>
+                            <Form.Group controlId="formName">
+                                <Form.Label className="form-label">Name</Form.Label>
+                                <Form.Control type="text" placeholder="Change Name" onChange={(e) => this.setName(e.target.value)} />
+                            </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label className="form-label">
-                                Password<span className="required">*</span>
-                            </Form.Label>
-                            <Form.Control type="password" placeholder="New Password" onChange={(e) => this.setPassword(e.target.value)} />
-                        </Form.Group>
+                            <Form.Group controlId="formBasicUsername">
+                                <Form.Label className="form-label">Username</Form.Label>
+                                <Form.Control type="text" placeholder="Change Name" onChange={(e) => this.setUsername(e.target.value)} />
+                            </Form.Group>
 
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label className="form-label">Email</Form.Label>
-                            <Form.Control type="date" placeholder="Change Email" onChange={(e) => this.setEmail(e.target.value)} />
-                        </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label className="form-label">
+                                    Password<span className="required">*</span>
+                                </Form.Label>
+                                <Form.Control type="password" placeholder="New Password" onChange={(e) => this.setPassword(e.target.value)} />
+                            </Form.Group>
 
-                        <Form.Group controlId="formBasicBirthday">
-                            <Form.Label className="form-label">Birthdate</Form.Label>
-                            <Form.Control type="date" placeholder="Change Birthdate" onChange={(e) => this.setBirthdate(e.target.value)} />
-                        </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label className="form-label">Email</Form.Label>
+                                <Form.Control type="date" placeholder="Change Email" onChange={(e) => this.setEmail(e.target.value)} />
+                            </Form.Group>
 
-                        <Button variant='danger' onClick={(e)=> this.handleUpdate(e)} type="submit">
-                            Update
-                        </Button>
+                            <Form.Group controlId="formBasicBirthday">
+                                <Form.Label className="form-label">Birthdate</Form.Label>
+                                <Form.Control type="date" placeholder="Change Birthdate" onChange={(e) => this.setBirthdate(e.target.value)} />
+                            </Form.Group>
 
-                        <h3> Delete your Account</h3>
-                        <Card.Body>
-                        <div className="delete-account">
-                            <Button variant='danger' onClick={(e) => this.handleDeleteUser(e)}>
-                                Delete Account
+                            <Button variant='danger' onClick={(e) => this.handleUpdate(e)} type="submit">
+                                Update
                             </Button>
-                        </div>
-                        </Card.Body>
 
-                    </Form>
-                </Card.Body>
+                            <div>
+                            <h3 className="delete-text"> Delete your Account</h3>
+                            <Card.Body>
+                                <div className="delete-account">
+                                    <Button variant='danger' onClick={(e) => this.handleDeleteUser(e)}>
+                                        Delete Account
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                            </div>
+                        </Form>
 
+                    </Card.Body>
+                </div>
 
             </div>
 

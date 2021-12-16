@@ -4,8 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
-import { Button
- } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import './register.scss';
 
 export function RegistrationView(props) {
     const [name, setName] = useState('')
@@ -23,7 +23,7 @@ export function RegistrationView(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         /*send a request to the server for the authentication */
-        axios.post('YOUR_API_URL/users', {
+        axios.post('https://kaycee-anime-site.herokuapp.com/users', {
             Name: name,
             Username: username,
             Password: password,

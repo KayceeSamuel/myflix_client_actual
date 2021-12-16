@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { ProfileView } from '../profile-view/profile-view';
+import './movieView.scss';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 
 export class Movieview extends React.Component {
 
@@ -12,7 +14,7 @@ export class Movieview extends React.Component {
     }
 
     componentDidMount() {
-        document.addEventListener('keypress', this.keypressCallback );
+        document.addEventListener('keypress', this.keypressCallback);
     }
 
     componentWillUnmount() {
@@ -21,56 +23,67 @@ export class Movieview extends React.Component {
 
     addFavorite() {
         const token = localStorage.getItem('token');
-        const username =  localStorage.getItem('user');
+        const username = localStorage.getItem('user');
 
         axios.post(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movie._id}`, {}, {
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then(response => {
-            alert('Added to Favorites List')
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then(response => {
+                alert('Added to Favorites List')
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
-    render () {
-        const { movie, onBackClick } = this.props;
+    render() {
+        const { movie } = this.props;
         const { user } = this.props;
+        const { onBackClick } = this.props;
+
+
         return (
-            <div className="movie-view">
-                <div className="movie-poster">
-                    <img src={movie.ImagePath} alt ='pic of anime' />
-                </div>
-                
-                <div className="movie-title">
-                    <span className="label">Title: {movie.Title} </span>
-                    <span className="value">{movie.Title}</span>
-                </div>
-                <div className="movie-description">
-                    <span className="label">Description: </span>
-                    <span className="value">{movie.Description}</span>
-                </div>
+            <Container className="moviesContainer">
+                <Row>
+                    <Col>
+                        <div className="movie-view">
+                            <div className="movie-poster">
+                                <img className="movie-pic" src={movie.ImagePath} alt='pic of anime' />
+                            </div>
+                            <div className="remainingText">
+                                <div className="movie-title">
 
+                                    <span className="main-text">{movie.Title}</span>
+                                </div>
+                                <div className="movie-description">
+                                    <span className="label">Description: </span>
+                                    <span className="value">{movie.Description}</span>
+                                </div>
 
-                <Link to={`/stream/${movie.Stream.Name}`}>
-                    <Button variant="link">Stream: {movie.Stream.Name}</Button>
-                </Link>
-                
-                <Link to={`/genres/${movie.Genre.Name}`}>
-                    <Button variant="link">Genre: {movie.Genre.Name}</Button>
-                </Link>
+                                <div>
+                                <Link to={`/stream/${movie.Stream.Name}`}>
+                                    <Button variant="link">Stream: {movie.Stream.Name}</Button>
+                                </Link>
 
-                <Button variant ='danger' className='fav-button' value = {movie._id} onClick={(e) => this.addFavorite(e, movie)}>
-                    Add to Favorites
-                </Button>
+                                <Link to={`/genres/${movie.Genre.Name}`}>
+                                    <Button variant="link">Genre: {movie.Genre.Name}</Button>
+                                </Link>
+                                </div>
 
-                <Button variant ="primary" onClick={() => {onBackClick(null); }}>Back</Button>
-
-            </div>
+                                <Button variant='danger' className='fav-button' value={movie._id} onClick={(e) => this.addFavorite(e, movie)}>
+                                    Add to Favorites
+                                </Button>
+                                <div>
+                                <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
-    
+
 
 }
 
