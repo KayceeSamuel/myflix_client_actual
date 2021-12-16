@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { ProfileView } from '../profile-view/profile-view';
+
 import './movieView.scss';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export class Movieview extends React.Component {
 
@@ -38,7 +38,7 @@ export class Movieview extends React.Component {
 
     render() {
         const { movie } = this.props;
-        const { user } = this.props;
+     
         const { onBackClick } = this.props;
 
 

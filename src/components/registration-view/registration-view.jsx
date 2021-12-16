@@ -8,13 +8,13 @@ import { Button } from 'react-bootstrap';
 import './register.scss';
 
 export function RegistrationView(props) {
-    const [name, setName] = useState('')
+    //const [name, setName] = useState('')
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthdate, setBirthdate] = useState('');
 
-    const [nameError, setNameError] = useState('');
+   // const [nameError, setNameError] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -22,9 +22,11 @@ export function RegistrationView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const isReq = formValidation();
         /*send a request to the server for the authentication */
+        if(isReq){
         axios.post('https://kaycee-anime-site.herokuapp.com/users', {
-            Name: name,
+        //    Name: name,
             Username: username,
             Password: password,
             Email: email,
@@ -38,19 +40,20 @@ export function RegistrationView(props) {
             .catch(e => {
                 console.log('error registering the user')
             })
-    }
+        }
+    };
     const formValidation = () => {
-        let nameError = {};
+       // let nameError = {};
         let usernameError = {};
         let passwordError = {};
-        let emailErorr = {};
+        let emailError = {};
         let birthdateError = {};
         let isValid = true
 
-        if (name === '') {
+        /*if (name === '') {
             nameError.nameEmpty = "Please enter your Name";
             isValid = false;
-        }
+        }*/
 
         if (username.trim().length < 4) {
             usernameError.usernameShort = "Username incorrect. Use at least 4 characters";
@@ -72,7 +75,7 @@ export function RegistrationView(props) {
             isValid = false;
         }
 
-        setNameError(nameError);
+       // setNameError(nameError);
         setUsernameError(usernameError);
         setPasswordError(passwordError);
         setEmailError(emailError);
@@ -166,7 +169,7 @@ RegistrationView.propTypes = {
         Username: PropTypes.string.isRequired,
         Email: PropTypes.string.isRequired,
         Genre: PropTypes.shape({
-            Name: PropTypes.string.isRequired
+ //           Name: PropTypes.string.isRequired
         }),
         Stream: PropTypes.shape({
             Name: PropTypes.string.isRequired

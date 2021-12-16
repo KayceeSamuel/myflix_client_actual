@@ -19,7 +19,7 @@ import { NavBar } from '../navbar-view/navbar-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+
 import './main.scss';
 import FooterPage from '../footer/footerView';
 

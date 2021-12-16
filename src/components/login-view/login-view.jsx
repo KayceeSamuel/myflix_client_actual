@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { RegistrationView } from '../registration-view/registration-view';
-import { Link } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+
+
+
 import './login.scss';
 
 export function LoginView(props) {

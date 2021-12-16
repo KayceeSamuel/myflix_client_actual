@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 import { CardDeck, Form } from 'react-bootstrap';
-import MoviesList from '../movies-list/movies-list';
-import userEvent from '@testing-library/user-event';
-import { MovieCard } from '../movie-card/movie-card';
-import Col from 'react-bootstrap/Col';
+
 import './profile.scss';
 
 
@@ -170,13 +167,13 @@ export class ProfileView extends React.Component {
             <div className="profile-view">
                 <div className="description view">
                     <div>
-                        <a>Username: {this.state.Username}</a>
+                        <a href="/#">Username: {this.state.Username}</a>
                     </div>
                     <div>
-                        <a>Email: {this.state.Email}</a>
+                        <a href="/#">Email: {this.state.Email}</a>
                     </div>
                     <div>
-                        <a>Birthday: {this.state.Birthday}</a>
+                        <a href="/#">Birthday: {this.state.Birthday}</a>
                     </div>
 
                 </div>

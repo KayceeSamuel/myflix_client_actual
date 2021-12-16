@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+
 
 
 export class StreamView extends React.Component {
@@ -18,7 +18,7 @@ export class StreamView extends React.Component {
     }
 
     render() {
-        const { movie, onBackClick } = this.props;
+        const { onBackClick } = this.props;
         const { stream } = this.props;
 
         return (

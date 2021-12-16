@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
+
+import { Navbar, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import './navbar.scss';
 import logo from '../img/logoFinished5.png';
