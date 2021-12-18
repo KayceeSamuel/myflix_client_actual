@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Col, Row } from 'react-bootstrap';
+import { MovieCard } from '../movie-card/movie-card';
 
 
 import axios from 'axios';
-import { CardDeck, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import './profile.scss';
 
@@ -57,9 +59,9 @@ export class ProfileView extends React.Component {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('user');
 
-        axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/` + (id), {
-//      axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movieId}
-        headers: { Authorization: `Bearer ${token}` },
+        axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${id}`, {
+            //      axios.delete(`https://kaycee-anime-site.herokuapp.com/users/${username}/movies/${this.props.movieId}
+            headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {
                 alert('Movie has been removed');
@@ -159,47 +161,56 @@ export class ProfileView extends React.Component {
     }
 
 
-    render() {
+    renderFavoriteMovies = () => {
         const { FavoriteMovies } = this.state;
         const { movies } = this.props;
 
+        return FavoriteMovies.map((movie, index) => {
+            const movCard = movies.find(m => m._id === movie)
+            return (
+                    /*<CardDeck className="movie-card-deck" key={index}>
+                        <Card className="favorites" style={{ width: '16rem ' }} key={movCard._id}>
+                            <Card.Img style={{ width: '18rem' }} className="movieCard" variant="top" src={movCard.ImagePath} />
+                            <Card.Body>
+                                <Card.Title className="movie-card-title">{movCard.Title}</Card.Title>
+                                <Button size='sm' className='deleteButton' variant='danger' value={movCard._id} onClick={(e) => this.removeFavoriteMovie(movCard._id)}>
+                                    Remove
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                    </CardDeck>*/
+                    <Col className="cardDisplay" xs={2} md={3} key={movCard._id}>
+                        <MovieCard movie={movCard} />
+                    </Col>
+                
+
+            )
+        })
+    }
+
+    render() {
+        const { FavoriteMovies } = this.state;
+
+
         return (
-            <div className="profile-view">
+            <Row className="profile-view">
                 <div className="description view">
                     <div>
-                        <a href="/#">Username: {this.state.Username}</a>
+                        <p>Username: {this.state.Username}</p>
                     </div>
                     <div>
-                        <a href="/#">Email: {this.state.Email}</a>
+                        <p>Email: {this.state.Email}</p>
                     </div>
                     <div>
-                        <a href="/#">Birthday: {this.state.Birthday}</a>
+                        <p>Birthday: {this.state.Birthday}</p>
                     </div>
 
                 </div>
-                <div className="favorite-movies">
-                    {!!FavoriteMovies.length ?
-                        movies.map((movie) => {
-                            if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
-                                return (
-                                    <CardDeck className="movie-card-deck">
-                                        <Card className="favorites-item-card-content" style={{ width: '16rem ' }} key={movie._id}>
-                                            <Card.Img style={{ width: '18rem' }} className="movieCard" variant="top" src={movie.ImagePath} />
-                                            <Card.Body>
-                                                <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
-                                                <Button size='sm' className='deleteButton' variant='danger' value={movie._id} onClick={(e) => this.removeFavoriteMovie(movie._id)}>
-                                                    Remove
-                                                </Button>
-                                            </Card.Body>
-                                        </Card>
-                                    </CardDeck>
-                                )
-                            }
-                        })
-                        : <h1>No favorite movies available</h1>
-                    }
-
-                </div>
+                <Row className="favorite-movies">
+                    <h4 className="animeHeader">Favorite Anime</h4>
+                    {!!FavoriteMovies.length ? this.renderFavoriteMovies() : <Col className="noFavorites"><h3>No favorite movies available</h3></Col>}
+                    
+                </Row>
                 <div className="updateSection">
                     <h1>Update Profile</h1>
                     <Card.Body>
@@ -237,21 +248,21 @@ export class ProfileView extends React.Component {
                             </Button>
 
                             <div>
-                            <h3 className="delete-text"> Delete your Account</h3>
-                            <Card.Body>
-                                <div className="delete-account">
-                                    <Button variant='danger' onClick={(e) => this.handleDeleteUser(e)}>
-                                        Delete Account
-                                    </Button>
-                                </div>
-                            </Card.Body>
+                                <h3 className="delete-text"> Delete your Account</h3>
+                                <Card.Body>
+                                    <div className="delete-account">
+                                        <Button variant='danger' onClick={(e) => this.handleDeleteUser(e)}>
+                                            Delete Account
+                                        </Button>
+                                    </div>
+                                </Card.Body>
                             </div>
                         </Form>
 
                     </Card.Body>
                 </div>
 
-            </div>
+            </Row>
 
         )
 
@@ -260,7 +271,7 @@ export class ProfileView extends React.Component {
 
 }
 
-ProfileView.propTypes = {
+/*ProfileView.propTypes = {
     user: PropTypes.shape({
         FavoriteMovies: PropTypes.arrayOf(
             PropTypes.shape({
@@ -272,6 +283,6 @@ ProfileView.propTypes = {
         Email: PropTypes.string.isRequired,
         Birthdate: PropTypes.instanceOf(Date)
     }),
-};
+};*/
 
 
