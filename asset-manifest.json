@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/myflix_client_actual/static/css/main.5618dd34.chunk.css",
+    "main.js": "/myflix_client_actual/static/js/main.ce9bd63a.chunk.js",
+    "main.js.map": "/myflix_client_actual/static/js/main.ce9bd63a.chunk.js.map",
+    "runtime-main.js": "/myflix_client_actual/static/js/runtime-main.e5fe8ec5.js",
+    "runtime-main.js.map": "/myflix_client_actual/static/js/runtime-main.e5fe8ec5.js.map",
+    "static/js/2.98830ba4.chunk.js": "/myflix_client_actual/static/js/2.98830ba4.chunk.js",
+    "static/js/2.98830ba4.chunk.js.map": "/myflix_client_actual/static/js/2.98830ba4.chunk.js.map",
+    "index.html": "/myflix_client_actual/index.html",
+    "static/css/main.5618dd34.chunk.css.map": "/myflix_client_actual/static/css/main.5618dd34.chunk.css.map",
+    "static/js/2.98830ba4.chunk.js.LICENSE.txt": "/myflix_client_actual/static/js/2.98830ba4.chunk.js.LICENSE.txt",
+    "static/media/instagram_icon.e5adfa9e.svg": "/myflix_client_actual/static/media/instagram_icon.e5adfa9e.svg",
+    "static/media/linkedin_icon.c94b93cc.svg": "/myflix_client_actual/static/media/linkedin_icon.c94b93cc.svg",
+    "static/media/logoFinished5.4a53a70f.png": "/myflix_client_actual/static/media/logoFinished5.4a53a70f.png",
+    "static/media/twitter_icon.1c6cac52.svg": "/myflix_client_actual/static/media/twitter_icon.1c6cac52.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e5fe8ec5.js",
+    "static/js/2.98830ba4.chunk.js",
+    "static/css/main.5618dd34.chunk.css",
+    "static/js/main.ce9bd63a.chunk.js"
+  ]
+}
