@@ -55,7 +55,7 @@ export class ProfileView extends React.Component {
     }
 
     //function to remove favorite movie
-    removeFavoriteMovie(id) {
+   /* removeFavoriteMovie(id) {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('user');
 
@@ -71,6 +71,7 @@ export class ProfileView extends React.Component {
                 console.log(error);
             })
     }
+    */
 
     //function to update users profile
     handleUpdate(e, newName, newUsername, newPassword, newEmail, newBirthdate) {
