@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "gh-pages": "^3.2.3",
+    "netlify-cli": "^9.13.3",
     "sass": "^1.38.2"
   }
 }
